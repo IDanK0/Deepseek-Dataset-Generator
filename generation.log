@@ -1,0 +1,31 @@
+2025-05-31 19:08:36,320 [INFO] Dataset salvato in dataset_nao_palestra_chatml.jsonl (10 esempi)
+2025-05-31 19:24:09,833 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (4 esempi)
+2025-05-31 19:34:05,406 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (2 esempi)
+2025-05-31 19:49:44,101 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:49:46,424 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:49:50,751 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:49:57,106 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:05,447 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:15,447 [ERROR] Errore generazione esempio: DeepSeek API failed after retries.
+2025-05-31 19:50:15,782 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:18,121 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:22,485 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:29,202 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:37,549 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:50:47,550 [ERROR] Errore generazione esempio: DeepSeek API failed after retries.
+2025-05-31 19:50:47,552 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (0 esempi)
+2025-05-31 19:52:50,612 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:52:52,926 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:52:57,298 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:03,702 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:12,188 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:22,188 [ERROR] Errore generazione esempio: DeepSeek API failed after retries.
+2025-05-31 19:53:22,548 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:24,868 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:29,204 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:35,542 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:43,903 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****90ab is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-05-31 19:53:53,904 [ERROR] Errore generazione esempio: DeepSeek API failed after retries.
+2025-05-31 19:53:53,905 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (0 esempi)
+2025-05-31 19:59:12,485 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (2 esempi)
+2025-06-01 11:16:32,131 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (2 esempi)
