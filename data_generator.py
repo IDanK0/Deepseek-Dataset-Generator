@@ -140,7 +140,8 @@ def generate_dataset(config, logger):
         dataset = unique_dataset
 
     new_examples = []
-    for _ in tqdm(range(num_examples), desc="Generating examples"):
+    error_during_generation = False
+    for i in tqdm(range(num_examples), desc="Generating examples"):
         try:
             conversation = generate_realistic_conversation(api, temperature, turns=turns, domain=domain)
             if include_id:
@@ -155,6 +156,13 @@ def generate_dataset(config, logger):
             new_examples.append(item)
         except Exception as e:
             logger.error(f"Errore generazione esempio: {e}")
+            error_during_generation = True
+            break
+
+    # Se errore, elimina l'ultima conversazione incompleta (se esiste)
+    if error_during_generation and new_examples:
+        new_examples = new_examples[:-1]
+        logger.error(f"Interruzione generazione: API non più funzionante. Esempi generati: {len(dataset) + len(new_examples)} su {num_examples} richiesti.")
 
     all_examples = dataset + [ex for ex in new_examples if ex.get("id") not in {d.get("id") for d in dataset} or not include_id]
     all_examples = clean_and_validate(all_examples)

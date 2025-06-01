@@ -33,3 +33,16 @@
 2025-06-01 12:09:46,048 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (5 esempi)
 2025-06-01 12:21:38,022 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (4 esempi)
 2025-06-01 12:36:09,982 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (4 esempi)
+2025-06-01 13:58:18,412 [ERROR] Request failed: Response ended prematurely
+2025-06-01 14:33:16,095 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+2025-06-01 15:02:01,288 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Read timed out.
+2025-06-01 15:23:57,625 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EA8A60>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:23:59,627 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EA9AB0>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:24:37,136 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EA9E10>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:24:39,139 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EA8B80>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:24:43,141 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EA8070>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:24:50,164 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EAAC50>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:25:09,195 [ERROR] Request failed: HTTPSConnectionPool(host='api.deepseek.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B8B0EAB520>: Failed to resolve 'api.deepseek.com' ([Errno 11001] getaddrinfo failed)"))
+2025-06-01 15:25:19,197 [ERROR] Errore generazione esempio: DeepSeek API failed after retries.
+2025-06-01 15:25:19,198 [ERROR] Interruzione generazione: API non più funzionante. Esempi generati: 164 su 25000 richiesti.
+2025-06-01 15:25:19,226 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (164 esempi)
