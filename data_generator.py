@@ -16,7 +16,6 @@ def generate_prompt(domain, multi_turn=False, cot=False):
         return f"Genera una domanda e risposta di alta qualità sul tema '{domain}'."
 
 def clean_and_validate(data):
-    # Rimuovi duplicati, risposte vuote, controlla coerenza
     seen = set()
     cleaned = []
     for item in data:
@@ -27,25 +26,30 @@ def clean_and_validate(data):
     return cleaned
 
 def balance_dataset(data):
-    # Esempio: bilanciamento semplice per ruoli o classi
-    # (implementare logica specifica se necessario)
     return data
 
 def build_system_user_prompt(domain):
-    # Diversifica i prompt utente per aumentare la varietà delle conversazioni
     prompt_templates = [
-        f"Genera SOLO una domanda realistica e naturale che un utente italiano potrebbe fare su un esercizio specifico in palestra nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su come usare correttamente un macchinario o attrezzo in palestra nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su sicurezza o prevenzione infortuni in palestra nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su come ottenere una scheda di allenamento personalizzata nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su errori comuni da evitare durante l'allenamento in palestra nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su consigli per migliorare le prestazioni o il benessere in palestra nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su come comportarsi in caso di dubbi o problemi con i macchinari nel dominio: {domain}.",
-        f"Genera SOLO una domanda realistica e naturale su come monitorare i progressi o chiedere feedback all'assistente nel dominio: {domain}."
+        f"Qual è una domanda inaspettata o poco comune che un utente potrebbe porre direttamente all'assistente descritto nel dominio: {domain}?",
+        f"Immagina che un utente abbia appena iniziato ad interessarsi al dominio: {domain}. Quale domanda spontanea potrebbe rivolgere all'assistente?",
+        f"Se un utente avesse un problema urgente o una situazione limite nel dominio: {domain}, quale domanda realistica potrebbe porre all'assistente?",
+        f"Quale domanda potrebbe fare un utente esperto per approfondire un aspetto avanzato o controverso, rivolgendosi all'assistente del dominio: {domain}?",
+        f"Quale curiosità, mito o leggenda metropolitana potrebbe chiedere un utente direttamente all'assistente nel dominio: {domain}?",
+        f"Se un utente volesse confrontare due approcci, metodi o strumenti nel dominio: {domain}, quale domanda realistica potrebbe porre all'assistente?",
+        f"Quale domanda potrebbe fare un utente che ha avuto un'esperienza negativa o un fallimento, rivolgendosi all'assistente del dominio: {domain}?",
+        f"Immagina una domanda ironica, provocatoria o fuori dagli schemi ma comunque pertinente, che un utente potrebbe rivolgere all'assistente nel dominio: {domain} (senza essere offensiva o fuori contesto).",
+        f"Quale domanda potrebbe porre un utente che vuole risparmiare tempo, fatica o risorse, chiedendo direttamente all'assistente del dominio: {domain}?",
+        f"Se un utente volesse ottenere il massimo risultato con il minimo sforzo nel dominio: {domain}, quale domanda realistica potrebbe fare all'assistente?",
+        f"Quale domanda potrebbe fare un utente che vuole evitare errori imbarazzanti o situazioni scomode, chiedendo consiglio all'assistente del dominio: {domain}?",
+        f"Se un utente volesse sapere cosa NON fare assolutamente nel dominio: {domain}, quale domanda realistica potrebbe porre all'assistente?",
+        f"Quale domanda potrebbe fare un utente che vuole distinguersi o essere originale, rivolgendosi all'assistente del dominio: {domain}?",
+        f"Immagina che un utente abbia sentito una notizia recente o una novità nel dominio: {domain}. Quale domanda realistica potrebbe fare all'assistente per saperne di più?",
+        f"Quale domanda potrebbe porre un utente che vuole capire le differenze tra principianti ed esperti, chiedendo direttamente all'assistente del dominio: {domain}?"
     ]
     prompt = random.choice(prompt_templates)
     prompt += (
-        " La domanda deve essere pertinente al dominio. "
+        " La domanda deve essere rivolta direttamente all'assistente del dominio. "
+        "Deve essere pertinente al dominio. "
         "NON aggiungere spiegazioni, NON rispondere, NON inserire meta-istruzioni. "
         "NON usare markdown, NON usare emoji, NON usare simboli, NON usare elenchi puntati, NON usare grassetto/corsivo, NON usare virgolette, NON usare titoli o intestazioni, NON usare caratteri speciali. Solo la domanda dell'utente, in italiano naturale."
     )
@@ -53,23 +57,23 @@ def build_system_user_prompt(domain):
 
 def build_system_assistant_prompt(domain):
     return (
-        f"Rispondi come un assistente nel dominio: {domain}, in modo preciso, didattico, professionale e in italiano. "
-        "Dai spiegazioni chiare, step-by-step, e chiedi se l'utente vuole approfondire o ricevere una risposta personalizzata. "
+        f"Rispondi immedesimandoti completamente come l'assistente descritto nel dominio: {domain}. "
+        "Scrivi sempre in prima persona, come se fossi davvero l'assistente o il soggetto del dominio. "
+        "Sii preciso, didattico, professionale e in italiano. Dai spiegazioni chiare, step-by-step, e chiedi se l'utente vuole approfondire o ricevere una risposta personalizzata. "
         "NON usare markdown, NON usare emoji, NON usare simboli, NON usare elenchi puntati, NON usare grassetto/corsivo, NON usare virgolette, NON usare titoli o intestazioni, NON usare caratteri speciali. Solo testo naturale, senza prefissi o note."
     )
 
 def clean_message_content(text):
-    # Rimuovi markdown, intestazioni, virgolette doppie, escape, prefissi tipo "Risposta di NAO..."
-    text = re.sub(r'\*\*.*?\*\*', '', text)  # Rimuove grassetto markdown
-    text = re.sub(r'\*.*?\*', '', text)        # Rimuove corsivo markdown
-    text = re.sub(r'#+ ', '', text)             # Rimuove titoli markdown
-    text = re.sub(r'\n+', '\n', text)         # Rimuove righe vuote multiple
-    text = re.sub(r'(^|\n)[\-\*] ', '\n', text)  # Rimuove bullet point markdown
-    text = re.sub(r'"', '', text)              # Rimuove virgolette doppie
-    text = re.sub(r'\\', '', text)            # Rimuove escape
-    text = re.sub(r'\s*Risposta di NAO.*?:', '', text, flags=re.IGNORECASE)  # Rimuove intestazioni
-    text = re.sub(r'\s*NAO.*?:', '', text, flags=re.IGNORECASE)              # Rimuove altre intestazioni
-    text = re.sub(r'\s*\*.*?\*', '', text)    # Rimuove eventuali note tra asterischi
+    text = re.sub(r'\*\*.*?\*\*', '', text)
+    text = re.sub(r'\*.*?\*', '', text)
+    text = re.sub(r'#+ ', '', text)
+    text = re.sub(r'\n+', '\n', text)
+    text = re.sub(r'(^|\n)[\-\*] ', '\n', text)
+    text = re.sub(r'"', '', text)
+    text = re.sub(r'\\', '', text)
+    text = re.sub(r'\s*Risposta di NAO.*?:', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s*NAO.*?:', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s*\*.*?\*', '', text)
     text = text.replace('—', '').replace('–', '')
     text = text.strip()
     return text
@@ -107,32 +111,57 @@ def generate_dataset(config, logger):
     output_format = config["output_format"].lower()
     output_file = config["output_file"]
     extend_existing = config.get("extend_existing", False)
-    domain = config.get("domain", "palestra ITIS Campochiesa")
-    turns = config.get("turns_per_conversation", 3)  # Conversazioni di almeno 3 turni (user/assistant/user/assistant/user/assistant)
+    domain = config.get("domain", "palestra")
+    turns = config.get("turns_per_conversation", 3)
+    include_id = config.get("include_id", True)
 
     dataset = []
     if extend_existing and os.path.exists(output_file):
         import json
-        with open(output_file, "r", encoding="utf-8") as f:
-            dataset = json.load(f)
+        try:
+            with open(output_file, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+                if isinstance(existing, list):
+                    dataset = existing
+                elif isinstance(existing, dict):
+                    dataset = [existing]
+        except Exception as e:
+            logger.warning(f"Impossibile caricare il dataset esistente: {e}. Verrà creato un nuovo file.")
+            dataset = []
+        seen_ids = set()
+        unique_dataset = []
+        for item in dataset:
+            item_id = item.get("id")
+            if item_id and item_id not in seen_ids:
+                unique_dataset.append(item)
+                seen_ids.add(item_id)
+            elif not item_id:
+                unique_dataset.append(item)
+        dataset = unique_dataset
 
+    new_examples = []
     for _ in tqdm(range(num_examples), desc="Generating examples"):
         try:
             conversation = generate_realistic_conversation(api, temperature, turns=turns, domain=domain)
-            item = {
-                "id": str(uuid.uuid4()),
-                "messages": conversation
-            }
-            dataset.append(item)
+            if include_id:
+                item = {
+                    "id": str(uuid.uuid4()),
+                    "messages": conversation
+                }
+            else:
+                item = {
+                    "messages": conversation
+                }
+            new_examples.append(item)
         except Exception as e:
             logger.error(f"Errore generazione esempio: {e}")
 
-    dataset = clean_and_validate(dataset)
-    dataset = balance_dataset(dataset)
+    all_examples = dataset + [ex for ex in new_examples if ex.get("id") not in {d.get("id") for d in dataset} or not include_id]
+    all_examples = clean_and_validate(all_examples)
+    all_examples = balance_dataset(all_examples)
 
-    # Forza il salvataggio in formato array JSON se il formato è chatml/sharegpt/alpaca/json/jsonl
     if output_format in ["jsonl", "chatml", "sharegpt", "json"]:
-        save_json(dataset, output_file)
+        save_json(all_examples, output_file)
     elif output_format == "csv":
-        save_csv(dataset, output_file)
-    logger.info(f"Dataset salvato in {output_file} ({len(dataset)} esempi)")
+        save_csv(all_examples, output_file)
+    logger.info(f"Dataset salvato in {output_file} ({len(all_examples)} esempi)")

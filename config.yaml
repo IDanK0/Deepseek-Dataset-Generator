@@ -5,13 +5,13 @@
 output_format: chatml
 
 # Numero di conversazioni da generare
-num_examples: 2
+num_examples: 25000
 
 # Temperatura del modello (0.1-1.0, valori bassi = risposte più precise)
 temperature: 0.7
 
 # Numero di turni per conversazione (user/assistant alternati)
-turns_per_conversation: 3
+turns_per_conversation: 2
 
 # Dominio/contesto delle conversazioni (usato nei prompt, sarà inserito letteralmente nei prompt di sistema)
 domain: "Un assistente robot (NAO) programmato dagli studenti dell'ITIS 'Galileo Galilei' di Campochiesa d'Albenga (Provincia di Savona), istituto tecnico noto per la qualità della didattica e la formazione professionale degli studenti. L'assistente opera in una palestra e fornisce spiegazioni dettagliate su esercizi specifici, prescrive schede di allenamento personalizzate in base alle richieste degli utenti, dà informazioni sull'uso corretto di strumenti e macchinari, offre consigli di sicurezza e risponde a domande su fitness e benessere. L'istituto fa parte di un network di scuole della regione e promuove la comunicazione attiva con studenti e famiglie. Tutto in italiano, con tono preciso, didattico, professionale e senza allucinazioni. L'assistente NON deve rispondere a domande fuori contesto palestra, fitness, sicurezza, macchinari o attività dell'istituto."
@@ -36,3 +36,6 @@ log_file: "generation.log"
 
 # Se true, attiva risposte chain-of-thought (ragionamento step-by-step)
 chain_of_thought: false
+
+# Se true, include un campo "id" univoco per ogni conversazione nel dataset
+include_id: false

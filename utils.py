@@ -19,7 +19,6 @@ def setup_logging(log_file):
 
 def save_jsonl(data, path):
     import json
-    # Salva come array JSON valido se il path termina con .json, altrimenti salva come JSONL
     if path.endswith('.json'):
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
