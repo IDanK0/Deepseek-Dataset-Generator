@@ -46,3 +46,11 @@
 2025-06-01 15:25:19,197 [ERROR] Errore generazione esempio: DeepSeek API failed after retries.
 2025-06-01 15:25:19,198 [ERROR] Interruzione generazione: API non più funzionante. Esempi generati: 164 su 25000 richiesti.
 2025-06-01 15:25:19,226 [INFO] Dataset salvato in datasets/dataset_nao_palestra_chatml.jsonl (164 esempi)
+2025-06-02 01:49:35,875 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:49:38,212 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:49:42,547 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:49:48,874 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:49:57,202 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:50:07,202 [ERROR] Error generating example: DeepSeek API failed after retries.
+2025-06-02 01:50:07,203 [INFO] Dataset saved to datasets/dataset.jsonl (0 examples)
+2025-06-02 01:52:47,417 [INFO] Dataset saved to datasets/dataset.jsonl (2 examples)

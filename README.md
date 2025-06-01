@@ -30,10 +30,10 @@ Edit `config.yaml` to customize:
 Example `config.yaml`:
 ```yaml
 output_format: chatml
-num_examples: 25000
+num_examples: 500
 temperature: 0.7
 turns_per_conversation: 2
-domain: "TOPIC"
+domain: "Medical assistance"
 output_file: "datasets/dataset.jsonl"
 extend_existing: false
 api_key: "DEEPSEEK-API-KEY"

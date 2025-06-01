@@ -5,7 +5,7 @@
 output_format: chatml
 
 # Number of conversations to generate
-num_examples: 25000
+num_examples: 2
 
 # Model temperature (0.1-1.0, lower values = more precise answers)
 temperature: 0.7
@@ -14,7 +14,7 @@ temperature: 0.7
 turns_per_conversation: 2
 
 # Domain/context of the conversations (used in prompts, will be inserted literally in system prompts)
-domain: "TOPIC"
+domain: "Medical assistance"
 
 # Output file path (will be created as a valid JSON array)
 output_file: "datasets/dataset.jsonl"
