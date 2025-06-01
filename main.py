@@ -1,3 +1,4 @@
+# Main entrypoint for the DeepSeek dataset generator
 import argparse
 from utils import load_config, setup_logging
 from data_generator import generate_dataset

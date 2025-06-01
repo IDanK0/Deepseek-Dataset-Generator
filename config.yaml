@@ -1,41 +1,41 @@
-# Configurazione principale per il generatore di dataset conversazionali
-# Personalizza i parametri qui sotto secondo le tue esigenze
+# Main configuration for the conversational dataset generator
+# Customize the parameters below as needed
 
-# Formato di output: chatml, sharegpt, alpaca, json, jsonl, csv
+# Output format: chatml, sharegpt, alpaca, json, jsonl, csv
 output_format: chatml
 
-# Numero di conversazioni da generare
+# Number of conversations to generate
 num_examples: 25000
 
-# Temperatura del modello (0.1-1.0, valori bassi = risposte più precise)
+# Model temperature (0.1-1.0, lower values = more precise answers)
 temperature: 0.7
 
-# Numero di turni per conversazione (user/assistant alternati)
+# Number of turns per conversation (user/assistant alternated)
 turns_per_conversation: 2
 
-# Dominio/contesto delle conversazioni (usato nei prompt, sarà inserito letteralmente nei prompt di sistema)
-domain: "Un assistente robot (NAO) programmato dagli studenti dell'ITIS 'Galileo Galilei' di Campochiesa d'Albenga (Provincia di Savona), istituto tecnico noto per la qualità della didattica e la formazione professionale degli studenti. L'assistente opera in una palestra e fornisce spiegazioni dettagliate su esercizi specifici, prescrive schede di allenamento personalizzate in base alle richieste degli utenti, dà informazioni sull'uso corretto di strumenti e macchinari, offre consigli di sicurezza e risponde a domande su fitness e benessere. L'istituto fa parte di un network di scuole della regione e promuove la comunicazione attiva con studenti e famiglie. Tutto in italiano, con tono preciso, didattico, professionale e senza allucinazioni. L'assistente NON deve rispondere a domande fuori contesto palestra, fitness, sicurezza, macchinari o attività dell'istituto."
+# Domain/context of the conversations (used in prompts, will be inserted literally in system prompts)
+domain: "TOPIC"
 
-# Percorso del file di output (verrà creato in formato array JSON valido)
-output_file: "datasets/dataset_nao_palestra_chatml.jsonl"
+# Output file path (will be created as a valid JSON array)
+output_file: "datasets/dataset.jsonl"
 
-# Se true, estende un dataset esistente invece di sovrascrivere
+# If true, extends an existing dataset instead of overwriting
 extend_existing: false
 
-# Chiave API DeepSeek
-api_key: "sk-d3236fba17a342ca8909635e9032cc70"
+# DeepSeek API key
+api_key: "DEEPSEEK-API-KEY"
 
-# Numero massimo di tentativi per ogni chiamata API
+# Maximum number of attempts for each API call
 max_retries: 5
 
-# Secondi di attesa tra i retry in caso di errore/rate limit
+# Seconds to wait between retries in case of error/rate limit
 retry_backoff: 2
 
-# File di log dettagliato
+# Detailed log file
 log_file: "generation.log"
 
-# Se true, attiva risposte chain-of-thought (ragionamento step-by-step)
+# If true, enables chain-of-thought (step-by-step reasoning) answers
 chain_of_thought: false
 
-# Se true, include un campo "id" univoco per ogni conversazione nel dataset
+# If true, includes a unique "id" field for each conversation in the dataset
 include_id: false

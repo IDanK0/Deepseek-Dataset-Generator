@@ -1,53 +1,86 @@
-# Synthetic Dataset Generator for LLM Fine-Tuning (DeepSeek)
+# Deepseek-Dataset-Generator
 
-## Requisiti
-- Python 3.9+
-- Windows (PowerShell supportato)
+Conversational dataset generator for LLM fine-tuning, optimized for the DeepSeek API (chosen for its low cost and efficiency). It allows you to create datasets in various formats (ChatML, ShareGPT, Alpaca, JSON, CSV) by simulating realistic conversations in English (or any language) on customizable domains.
 
-## Installazione dipendenze
+## Main Features
+- **DeepSeek API**: uses DeepSeek to generate questions and answers, ideal for those looking for an affordable and scalable solution.
+- **Advanced prompts**: generates multi-turn conversations, chain-of-thought questions, and covers realistic and varied use cases.
+- **Supported formats**: exports to ChatML, ShareGPT, Alpaca, JSON, JSONL, CSV.
+- **Simple configuration**: everything managed via `config.yaml`.
+- **Detailed logging**: every generation is tracked in a log file.
 
+## Requirements
+- Python 3.8+
+- Dependencies installable via `pip install -r requirements.txt`
+
+## Installation
 ```powershell
-pip install requests pandas tqdm pyyaml
+pip install -r requirements.txt
 ```
 
-## Configurazione
-Modifica `config.yaml` per:
-- Numero di esempi (`num_examples`)
-- Temperatura (`temperature`)
-- Dominio/argomento (`domain`)
-- Formato di output (`output_format`: chatml, sharegpt, alpaca, json, jsonl, csv)
-- File di output (`output_file`)
-- Estensione dataset esistente (`extend_existing`)
-- API Key DeepSeek (`api_key`)
+## Configuration
+Edit `config.yaml` to customize:
+- Number of examples/conversations
+- Model temperature
+- Number of turns per conversation
+- Domain/context of conversations
+- Output format and file path
+- DeepSeek API key
 
-## Esecuzione
+Example `config.yaml`:
+```yaml
+output_format: chatml
+num_examples: 25000
+temperature: 0.7
+turns_per_conversation: 2
+domain: "TOPIC"
+output_file: "datasets/dataset.jsonl"
+extend_existing: false
+api_key: "DEEPSEEK-API-KEY"
+max_retries: 5
+retry_backoff: 2
+log_file: "generation.log"
+chain_of_thought: false
+include_id: false
+```
 
+## Usage
+Run the generator with:
 ```powershell
 python main.py --config config.yaml
 ```
+Options:
+- `--config`: path to the configuration file (default: `config.yaml`)
+- `--num_examples`: overrides the number of examples specified in config
 
-Il dataset verrà salvato nella cartella `datasets/` (es: `datasets/dataset_nao_palestra_chatml.jsonl`).
+## Project Structure
+- `main.py`: entrypoint, handles arguments and logging
+- `data_generator.py`: logic for generating conversations and datasets
+- `deepseek_api.py`: wrapper for DeepSeek API calls with retry management
+- `formats.py`: conversion between formats (ChatML, ShareGPT, Alpaca)
+- `utils.py`: utilities for logging, file saving, config loading
+- `config.yaml`: main configuration
+- `requirements.txt`: Python dependencies
+- `generation.log`: detailed generation log
+- `datasets/`: output folder for datasets
 
-## Consigli per la qualità dei dati
-- Varia i prompt e la temperatura per aumentare la diversità.
-- Controlla manualmente un campione dei dati generati.
-- Usa il bilanciamento per evitare bias.
+## DeepSeek API Notes
+- You must enter a valid API key in `config.yaml`.
+- In case of rate limit or errors, the system automatically retries.
 
-## Estensione
-Puoi modificare i moduli per:
-- Prompt engineering avanzato
-- Bilanciamento personalizzato
-- Validazione dati più sofisticata
+## Output Example (ChatML)
+```json
+{
+  "messages": [
+    {"role": "user", "content": "Generated question..."},
+    {"role": "assistant", "content": "Generated answer..."}
+  ]
+}
+```
 
-## Formati supportati
-- ChatML (multi-turno)
-- ShareGPT (multi-turno)
-- Alpaca (istruzioni singole)
-- JSON, JSONL, CSV
-
-## Log
-Tutti i log sono salvati in `generation.log`.
+## License
+See LICENSE file.
 
 ---
 
-Per dettagli su fine-tuning e formati, vedi la documentazione Unsloth e DeepSeek.
+**Deepseek-Dataset-Generator** is designed for those who want to quickly generate high-quality datasets for LLM fine-tuning, leveraging the convenience of the DeepSeek API.

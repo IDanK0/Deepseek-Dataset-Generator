@@ -9,11 +9,11 @@ import re
 
 def generate_prompt(domain, multi_turn=False, cot=False):
     if multi_turn:
-        return f"Simula una conversazione realistica multi-turno nel dominio '{domain}'."
+        return f"Simulate a realistic multi-turn conversation in the domain '{domain}'."
     elif cot:
-        return f"Fornisci una risposta dettagliata con ragionamento step-by-step su '{domain}'."
+        return f"Provide a detailed answer with step-by-step reasoning about '{domain}'."
     else:
-        return f"Genera una domanda e risposta di alta qualità sul tema '{domain}'."
+        return f"Generate a high-quality question and answer on the topic '{domain}'."
 
 def clean_and_validate(data):
     seen = set()
@@ -30,37 +30,37 @@ def balance_dataset(data):
 
 def build_system_user_prompt(domain):
     prompt_templates = [
-        f"Qual è una domanda inaspettata o poco comune che un utente potrebbe porre direttamente all'assistente descritto nel dominio: {domain}?",
-        f"Immagina che un utente abbia appena iniziato ad interessarsi al dominio: {domain}. Quale domanda spontanea potrebbe rivolgere all'assistente?",
-        f"Se un utente avesse un problema urgente o una situazione limite nel dominio: {domain}, quale domanda realistica potrebbe porre all'assistente?",
-        f"Quale domanda potrebbe fare un utente esperto per approfondire un aspetto avanzato o controverso, rivolgendosi all'assistente del dominio: {domain}?",
-        f"Quale curiosità, mito o leggenda metropolitana potrebbe chiedere un utente direttamente all'assistente nel dominio: {domain}?",
-        f"Se un utente volesse confrontare due approcci, metodi o strumenti nel dominio: {domain}, quale domanda realistica potrebbe porre all'assistente?",
-        f"Quale domanda potrebbe fare un utente che ha avuto un'esperienza negativa o un fallimento, rivolgendosi all'assistente del dominio: {domain}?",
-        f"Immagina una domanda ironica, provocatoria o fuori dagli schemi ma comunque pertinente, che un utente potrebbe rivolgere all'assistente nel dominio: {domain} (senza essere offensiva o fuori contesto).",
-        f"Quale domanda potrebbe porre un utente che vuole risparmiare tempo, fatica o risorse, chiedendo direttamente all'assistente del dominio: {domain}?",
-        f"Se un utente volesse ottenere il massimo risultato con il minimo sforzo nel dominio: {domain}, quale domanda realistica potrebbe fare all'assistente?",
-        f"Quale domanda potrebbe fare un utente che vuole evitare errori imbarazzanti o situazioni scomode, chiedendo consiglio all'assistente del dominio: {domain}?",
-        f"Se un utente volesse sapere cosa NON fare assolutamente nel dominio: {domain}, quale domanda realistica potrebbe porre all'assistente?",
-        f"Quale domanda potrebbe fare un utente che vuole distinguersi o essere originale, rivolgendosi all'assistente del dominio: {domain}?",
-        f"Immagina che un utente abbia sentito una notizia recente o una novità nel dominio: {domain}. Quale domanda realistica potrebbe fare all'assistente per saperne di più?",
-        f"Quale domanda potrebbe porre un utente che vuole capire le differenze tra principianti ed esperti, chiedendo direttamente all'assistente del dominio: {domain}?"
+        f"What is an unexpected or uncommon question a user might directly ask the assistant described in the domain: {domain}?",
+        f"Imagine a user has just started to get interested in the domain: {domain}. What spontaneous question might they ask the assistant?",
+        f"If a user had an urgent problem or an edge case in the domain: {domain}, what realistic question could they ask the assistant?",
+        f"What question might an expert user ask to delve into an advanced or controversial aspect, addressing the assistant in the domain: {domain}?",
+        f"What curiosity, myth, or urban legend might a user directly ask the assistant in the domain: {domain}?",
+        f"If a user wanted to compare two approaches, methods, or tools in the domain: {domain}, what realistic question could they ask the assistant?",
+        f"What question might a user who had a negative experience or failure ask the assistant in the domain: {domain}?",
+        f"Imagine an ironic, provocative, or out-of-the-box but still relevant question a user could ask the assistant in the domain: {domain} (without being offensive or out of context).",
+        f"What question might a user who wants to save time, effort, or resources ask the assistant in the domain: {domain}?",
+        f"If a user wanted to achieve the best result with the least effort in the domain: {domain}, what realistic question could they ask the assistant?",
+        f"What question might a user who wants to avoid embarrassing mistakes or awkward situations ask the assistant in the domain: {domain}?",
+        f"If a user wanted to know what NOT to do at all in the domain: {domain}, what realistic question could they ask the assistant?",
+        f"What question might a user who wants to stand out or be original ask the assistant in the domain: {domain}?",
+        f"Imagine a user has heard recent news or a novelty in the domain: {domain}. What realistic question could they ask the assistant to learn more?",
+        f"What question might a user who wants to understand the differences between beginners and experts ask the assistant in the domain: {domain}?"
     ]
     prompt = random.choice(prompt_templates)
     prompt += (
-        " La domanda deve essere rivolta direttamente all'assistente del dominio. "
-        "Deve essere pertinente al dominio. "
-        "NON aggiungere spiegazioni, NON rispondere, NON inserire meta-istruzioni. "
-        "NON usare markdown, NON usare emoji, NON usare simboli, NON usare elenchi puntati, NON usare grassetto/corsivo, NON usare virgolette, NON usare titoli o intestazioni, NON usare caratteri speciali. Solo la domanda dell'utente, in italiano naturale."
+        " The question must be addressed directly to the domain assistant. "
+        "It must be relevant to the domain. "
+        "DO NOT add explanations, DO NOT answer, DO NOT insert meta-instructions. "
+        "DO NOT use markdown, DO NOT use emoji, DO NOT use symbols, DO NOT use bullet points, DO NOT use bold/italic, DO NOT use quotes, DO NOT use titles or headings, DO NOT use special characters. Only the user's question, in natural English."
     )
     return prompt
 
 def build_system_assistant_prompt(domain):
     return (
-        f"Rispondi immedesimandoti completamente come l'assistente descritto nel dominio: {domain}. "
-        "Scrivi sempre in prima persona, come se fossi davvero l'assistente o il soggetto del dominio. "
-        "Sii preciso, didattico, professionale e in italiano. Dai spiegazioni chiare, step-by-step, e chiedi se l'utente vuole approfondire o ricevere una risposta personalizzata. "
-        "NON usare markdown, NON usare emoji, NON usare simboli, NON usare elenchi puntati, NON usare grassetto/corsivo, NON usare virgolette, NON usare titoli o intestazioni, NON usare caratteri speciali. Solo testo naturale, senza prefissi o note."
+        f"Answer by fully impersonating the assistant described in the domain: {domain}. "
+        "Always write in the first person, as if you really are the assistant or subject of the domain. "
+        "Be precise, didactic, professional, and in English. Give clear, step-by-step explanations, and ask if the user wants to go deeper or receive a personalized answer. "
+        "DO NOT use markdown, DO NOT use emoji, DO NOT use symbols, DO NOT use bullet points, DO NOT use bold/italic, DO NOT use quotes, DO NOT use titles or headings, DO NOT use special characters. Only natural text, without prefixes or notes."
     )
 
 def clean_message_content(text):
@@ -74,7 +74,7 @@ def clean_message_content(text):
     text = re.sub(r'\s*Risposta di NAO.*?:', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s*NAO.*?:', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s*\*.*?\*', '', text)
-    text = text.replace('—', '').replace('–', '')
+    text = text.replace('\u2014', '').replace('\u2013', '')
     text = text.strip()
     return text
 
@@ -87,21 +87,20 @@ def generate_realistic_conversation(api, temperature, turns=2, domain=None):
     last_user_message = user_question
     for i in range(turns):
         system_assistant_prompt = build_system_assistant_prompt(domain)
-        assistant_prompt = f"{system_assistant_prompt}\nDomanda utente: {last_user_message}"
+        assistant_prompt = f"{system_assistant_prompt}\nUser question: {last_user_message}"
         assistant_response = api.generate(assistant_prompt, temperature=temperature, max_tokens=512).strip()
         assistant_response = clean_message_content(assistant_response)
         conversation.append({"role": "assistant", "content": assistant_response})
         if i < turns - 1:
             followup_prompt = (
-                f"L'utente ha appena ricevuto questa risposta: '{assistant_response}'. "
-                f"Genera SOLO una domanda di follow-up realistica, naturale e pertinente che un utente italiano potrebbe fare dopo questa risposta, sempre nel contesto: {domain}. "
-                "NON aggiungere spiegazioni, NON rispondere, NON inserire meta-istruzioni. Solo la domanda. "
-                "NON usare markdown, NON usare emoji, NON usare simboli, NON usare elenchi puntati, NON usare grassetto/corsivo, NON usare virgolette, NON usare titoli o intestazioni, NON usare caratteri speciali. Solo la domanda dell'utente, in italiano naturale."
+                f"The user has just received this answer: '{assistant_response}'. "
+                f"Generate ONLY a realistic, natural, and relevant follow-up question that an English-speaking user might ask after this answer, always in the context: {domain}. "
+                "DO NOT add explanations, DO NOT answer, DO NOT insert meta-instructions. Only the question. "
+                "DO NOT use markdown, DO NOT use emoji, DO NOT use symbols, DO NOT use bullet points, DO NOT use bold/italic, DO NOT use quotes, DO NOT use titles or headings, DO NOT use special characters. Only the user's question, in natural English."
             )
-            user_followup = api.generate(followup_prompt, temperature=0.4, max_tokens=64).strip()
-            user_followup = clean_message_content(user_followup)
-            conversation.append({"role": "user", "content": user_followup})
-            last_user_message = user_followup
+            last_user_message = api.generate(followup_prompt, temperature=0.4, max_tokens=64).strip()
+            last_user_message = clean_message_content(last_user_message)
+            conversation.append({"role": "user", "content": last_user_message})
     return conversation
 
 def generate_dataset(config, logger):
@@ -126,7 +125,7 @@ def generate_dataset(config, logger):
                 elif isinstance(existing, dict):
                     dataset = [existing]
         except Exception as e:
-            logger.warning(f"Impossibile caricare il dataset esistente: {e}. Verrà creato un nuovo file.")
+            logger.warning(f"Unable to load existing dataset: {e}. A new file will be created.")
             dataset = []
         seen_ids = set()
         unique_dataset = []
@@ -155,14 +154,14 @@ def generate_dataset(config, logger):
                 }
             new_examples.append(item)
         except Exception as e:
-            logger.error(f"Errore generazione esempio: {e}")
+            logger.error(f"Error generating example: {e}")
             error_during_generation = True
             break
 
-    # Se errore, elimina l'ultima conversazione incompleta (se esiste)
+    # If error, delete the last incomplete conversation (if exists)
     if error_during_generation and new_examples:
         new_examples = new_examples[:-1]
-        logger.error(f"Interruzione generazione: API non più funzionante. Esempi generati: {len(dataset) + len(new_examples)} su {num_examples} richiesti.")
+        logger.error(f"Generation interrupted: API no longer responsive. Examples generated: {len(dataset) + len(new_examples)} out of {num_examples} requested.")
 
     all_examples = dataset + [ex for ex in new_examples if ex.get("id") not in {d.get("id") for d in dataset} or not include_id]
     all_examples = clean_and_validate(all_examples)
@@ -172,4 +171,4 @@ def generate_dataset(config, logger):
         save_json(all_examples, output_file)
     elif output_format == "csv":
         save_csv(all_examples, output_file)
-    logger.info(f"Dataset salvato in {output_file} ({len(all_examples)} esempi)")
+    logger.info(f"Dataset saved to {output_file} ({len(all_examples)} examples)")
