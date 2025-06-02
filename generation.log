@@ -54,3 +54,12 @@
 2025-06-02 01:50:07,202 [ERROR] Error generating example: DeepSeek API failed after retries.
 2025-06-02 01:50:07,203 [INFO] Dataset saved to datasets/dataset.jsonl (0 examples)
 2025-06-02 01:52:47,417 [INFO] Dataset saved to datasets/dataset.jsonl (2 examples)
+2025-06-02 01:56:19,713 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:56:22,026 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:56:26,367 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:56:32,699 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:56:41,025 [ERROR] API error: 401 - {"error":{"message":"Authentication Fails, Your api key: ****-KEY is invalid","type":"authentication_error","param":null,"code":"invalid_request_error"}}
+2025-06-02 01:56:51,027 [ERROR] Error generating example: DeepSeek API failed after retries.
+2025-06-02 01:56:51,028 [INFO] Dataset saved to datasets/dataset.jsonl (0 examples)
+2025-06-02 01:58:54,579 [INFO] Dataset saved to datasets/dataset.jsonl (2 examples)
+2025-06-02 02:07:31,964 [INFO] Dataset saved to datasets/dataset.jsonl (1 examples)

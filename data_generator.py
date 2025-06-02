@@ -55,13 +55,23 @@ def build_system_user_prompt(domain):
     )
     return prompt
 
-def build_system_assistant_prompt(domain):
-    return (
-        f"Answer by fully impersonating the assistant described in the domain: {domain}. "
-        "Always write in the first person, as if you really are the assistant or subject of the domain. "
-        "Be precise, didactic, professional, and in English. Give clear, step-by-step explanations, and ask if the user wants to go deeper or receive a personalized answer. "
-        "DO NOT use markdown, DO NOT use emoji, DO NOT use symbols, DO NOT use bullet points, DO NOT use bold/italic, DO NOT use quotes, DO NOT use titles or headings, DO NOT use special characters. Only natural text, without prefixes or notes."
-    )
+def build_system_assistant_prompt(domain, chain_of_thought=False):
+    if chain_of_thought:
+        return (
+            f"Answer by fully impersonating the assistant described in the domain: {domain}. "
+            "First, think step by step and write your reasoning inside <think>...</think> tags, explaining how you arrive at the answer, as if you were thinking aloud. "
+            "Then, after the <think>...</think> block, write the final answer clearly and concisely. "
+            "Always write in the first person, as if you really are the assistant or subject of the domain. "
+            "Be precise, didactic, professional, and in English. "
+            "DO NOT use markdown, DO NOT use emoji, DO NOT use symbols, DO NOT use bullet points, DO NOT use bold/italic, DO NOT use quotes, DO NOT use titles or headings, DO NOT use special characters. Only natural text, without prefixes or notes."
+        )
+    else:
+        return (
+            f"Answer by fully impersonating the assistant described in the domain: {domain}. "
+            "Always write in the first person, as if you really are the assistant or subject of the domain. "
+            "Be precise, didactic, professional, and in English. Give clear, step-by-step explanations, and ask if the user wants to go deeper or receive a personalized answer. "
+            "DO NOT use markdown, DO NOT use emoji, DO NOT use symbols, DO NOT use bullet points, DO NOT use bold/italic, DO NOT use quotes, DO NOT use titles or headings, DO NOT use special characters. Only natural text, without prefixes or notes."
+        )
 
 def clean_message_content(text):
     text = re.sub(r'\*\*.*?\*\*', '', text)
@@ -78,7 +88,7 @@ def clean_message_content(text):
     text = text.strip()
     return text
 
-def generate_realistic_conversation(api, temperature, turns=2, domain=None):
+def generate_realistic_conversation(api, temperature, turns=2, domain=None, chain_of_thought=False):
     conversation = []
     system_user_prompt = build_system_user_prompt(domain)
     user_question = api.generate(system_user_prompt, temperature=0.4, max_tokens=64).strip()
@@ -86,7 +96,7 @@ def generate_realistic_conversation(api, temperature, turns=2, domain=None):
     conversation.append({"role": "user", "content": user_question})
     last_user_message = user_question
     for i in range(turns):
-        system_assistant_prompt = build_system_assistant_prompt(domain)
+        system_assistant_prompt = build_system_assistant_prompt(domain, chain_of_thought=chain_of_thought)
         assistant_prompt = f"{system_assistant_prompt}\nUser question: {last_user_message}"
         assistant_response = api.generate(assistant_prompt, temperature=temperature, max_tokens=512).strip()
         assistant_response = clean_message_content(assistant_response)
@@ -113,6 +123,7 @@ def generate_dataset(config, logger):
     domain = config.get("domain", "palestra")
     turns = config.get("turns_per_conversation", 3)
     include_id = config.get("include_id", True)
+    chain_of_thought = config.get("chain_of_thought", False)
 
     dataset = []
     if extend_existing and os.path.exists(output_file):
@@ -142,7 +153,7 @@ def generate_dataset(config, logger):
     error_during_generation = False
     for i in tqdm(range(num_examples), desc="Generating examples"):
         try:
-            conversation = generate_realistic_conversation(api, temperature, turns=turns, domain=domain)
+            conversation = generate_realistic_conversation(api, temperature, turns=turns, domain=domain, chain_of_thought=chain_of_thought)
             if include_id:
                 item = {
                     "id": str(uuid.uuid4()),
