@@ -23,7 +23,7 @@ output_file: "datasets/dataset.jsonl"
 extend_existing: false
 
 # DeepSeek API key
-api_key: "sk-80ed9427de1b4ad3a0857fca7ceec6a8"
+api_key: "DEEPSEEK-API-KEY"
 
 # Maximum number of attempts for each API call
 max_retries: 5
